@@ -61,9 +61,6 @@ public class JwtUtils {
         return false;
     }
 
-    /*
-     * Some other JWT utility methods we might need later
-     * */
     private Date expirationDate(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
@@ -85,10 +82,5 @@ public class JwtUtils {
         return extractClaim(token, Claims::getSubject);
     }
 
-    private Boolean validateToken2(String token, UserDetails userDetails){
-        final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
-
-    }
 
 }
