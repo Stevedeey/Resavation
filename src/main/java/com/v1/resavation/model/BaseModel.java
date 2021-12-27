@@ -2,7 +2,9 @@ package com.v1.resavation.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -36,4 +38,6 @@ public class BaseModel implements Serializable {
     @LastModifiedDate
     @JsonIgnore
     private Date updatedAt;
+
+
 }
