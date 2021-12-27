@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
             throw new ApiBadRequestException("Password mismatched, Try again!!");
         }
 
-        if(!userDto.isTerms()){
+        if(!userDto.isTermAndCondition()){
             throw new ApiBadRequestException("Terms and condition box must be checked!!");
         }
 
