@@ -24,9 +24,7 @@ public class UserDto {
 
     private String verifyPassword;
 
-    private String encryptedPassword;
-
-    private boolean terms;
+    private boolean termAndCondition;
 
     private Set<String> roles;
 
