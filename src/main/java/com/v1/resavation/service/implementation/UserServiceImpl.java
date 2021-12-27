@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public RegistrationResponse registerUser(UserDto userDto) {
         if (userRepository.existsByEmail(userDto.getEmail())) {
-            throw new ApiBadRequestException("Email is already exist, Try again");
+            throw new ApiBadRequestException("Email already exists, Please try another email");
 
         }
 
@@ -55,6 +55,10 @@ public class UserServiceImpl implements UserService {
         if (!userDto.getPassword().equals(userDto.getVerifyPassword())) {
 
             throw new ApiBadRequestException("Password mismatched, Try again!!");
+        }
+
+        if(!userDto.isTerms()){
+            throw new ApiBadRequestException("Terms and condition box must be checked!!");
         }
 
         Set<String> stringList = userDto.getRoles();
