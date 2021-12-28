@@ -34,9 +34,9 @@ public class RoleAssignment {
                         break;
 
                     default:
-                        Role borrower = roleRepository.findByName(ERole.USER)
+                        Role user = roleRepository.findByName(ERole.USER)
                                 .orElseThrow(() -> new ApiResourceNotFoundException("Error: Role not found"));
-                        roles.add(borrower);
+                        roles.add(user);
 
                         break;
                 }
