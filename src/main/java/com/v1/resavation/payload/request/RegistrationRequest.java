@@ -1,5 +1,8 @@
 package com.v1.resavation.payload.request;
 
+import com.v1.resavation.validation.annotations.MatchedPassword;
+import com.v1.resavation.validation.annotations.ValidEmail;
+import com.v1.resavation.validation.annotations.ValidPassword;
 import lombok.*;
 
 import javax.validation.constraints.Email;
@@ -12,6 +15,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @ToString
 @Builder
+@MatchedPassword
 public class RegistrationRequest {
 
     @NotNull(message = "{name.null}")
@@ -26,11 +30,13 @@ public class RegistrationRequest {
     @Email(message = "{email.invalid}")
     @Size(max = 50, message = "email should contain characters not more than 50")
     @NotBlank(message = "{email.empty}")
+    @ValidEmail
     private String email;
 
     @NotNull(message = "{password.null}")
     @NotBlank(message = "{password.empty}")
     @Size(min = 8, message = "password should be 8 characters or more")
+    @ValidPassword
     private String password;
 
     @NotNull(message = "{password.null}")
