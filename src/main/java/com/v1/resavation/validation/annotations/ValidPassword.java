@@ -1,6 +1,6 @@
 package com.v1.resavation.validation.annotations;
 
-import com.v1.resavation.validation.validation_domain.PasswordValidation;
+import com.v1.resavation.validation.validators.PasswordValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = PasswordValidation.class)
+@Constraint(validatedBy = PasswordValidator.class)
 public @interface ValidPassword {
     String message() default "{custom.valid.password.message}";
     Class<?>[] groups() default {};

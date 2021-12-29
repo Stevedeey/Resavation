@@ -1,4 +1,4 @@
-package com.v1.resavation.validation.validation_domain;
+package com.v1.resavation.validation.validators;
 
 
 import com.v1.resavation.exception.ApiBadRequestException;
@@ -9,7 +9,7 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PasswordValidation implements ConstraintValidator<ValidPassword, String> {
+public class PasswordValidator implements ConstraintValidator<ValidPassword, String> {
     @Override
     public void initialize(ValidPassword constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);

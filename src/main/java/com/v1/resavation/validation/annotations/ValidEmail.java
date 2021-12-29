@@ -1,6 +1,6 @@
 package com.v1.resavation.validation.annotations;
 
-import com.v1.resavation.validation.validation_domain.EmailValidation;
+import com.v1.resavation.validation.validators.EmailValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = EmailValidation.class)
+@Constraint(validatedBy = EmailValidator.class)
 public @interface ValidEmail {
     String message() default "{custom.valid.email.message}";
     Class<?>[] groups() default {};

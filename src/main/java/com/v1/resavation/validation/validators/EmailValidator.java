@@ -1,4 +1,4 @@
-package com.v1.resavation.validation.validation_domain;
+package com.v1.resavation.validation.validators;
 
 import com.v1.resavation.exception.ApiBadRequestException;
 import com.v1.resavation.validation.annotations.ValidEmail;
@@ -8,7 +8,7 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class EmailValidation implements ConstraintValidator<ValidEmail, String> {
+public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
     @Override
     public void initialize(ValidEmail constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
