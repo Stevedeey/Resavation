@@ -38,40 +38,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public RegistrationResponse registerUser(UserDto userDto) {
-        if (userRepository.existsByEmail(userDto.getEmail())) {
-            throw new ApiBadRequestException("Email already exists, Please try another email");
-
-        }
-
-        if (!isEmailValid(userDto.getEmail())) {
-            throw new ApiBadRequestException("Invalid Email Format, Try again!!");
-
-        }
-
-        if (!isValidPassword(userDto.getPassword())) {
-            throw new ApiBadRequestException("Invalid password, Try again!!");
-        }
-
-        if (!userDto.getPassword().equals(userDto.getVerifyPassword())) {
-
-            throw new ApiBadRequestException("Password mismatched, Try again!!");
-        }
-
-        if(!userDto.isTermAndCondition()){
-            throw new ApiBadRequestException("Terms and condition box must be checked!!");
-        }
-
-        Set<String> stringList = userDto.getRoles();
-        Set<Role> roleList = roleAssignment.assignRole(stringList, roleRepository);
-
-        User user = User.builder()
-                .email(userDto.getEmail())
-                .firstName(userDto.getFirstname())
-                .lastName(userDto.getLastname())
-                .password(bCryptPasswordEncoder.encode(userDto.getPassword()))
-                .roles(roleList).build();
-
+        User user = null;
         try {
+            if (userRepository.existsByEmail(userDto.getEmail())) {
+                throw new ApiBadRequestException("Email already exists, Please try another email");
+
+            }
+
+            Set<String> stringList = userDto.getRoles();
+            Set<Role> roleList = roleAssignment.assignRole(stringList, roleRepository);
+
+            user = User.builder()
+                    .email(userDto.getEmail())
+                    .firstName(userDto.getFirstname())
+                    .lastName(userDto.getLastname())
+                    .password(bCryptPasswordEncoder.encode(userDto.getPassword()))
+                    .roles(roleList).build();
 
             userRepository.save(user);
             RegistrationResponse.setMessage("Registered successfully");
@@ -85,27 +67,4 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    private boolean isEmailValid(String password) {
-        String regex = "^(.+)@(\\w+)\\.(\\w+)$";
-
-        Pattern pattern = Pattern.compile(regex);
-        if (password == null) {
-            throw new ApiBadRequestException("Error: email cannot ne null");
-        }
-
-        Matcher matcher = pattern.matcher(password);
-        return matcher.matches();
-    }
-
-    private boolean isValidPassword(String password) {
-        String regex = "^(([0-9]|[a-z]|[A-Z]|[@])*){8,20}$";
-
-        Pattern pattern = Pattern.compile(regex);
-        if (password == null) {
-            throw new ApiBadRequestException("Error: password cannot ne null");
-        }
-
-        Matcher matcher = pattern.matcher(password);
-        return matcher.matches();
-    }
 }
